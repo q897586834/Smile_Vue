@@ -12,6 +12,8 @@ app.use(cors())
 app.use(bodyParser());
 let user = require('./appApi/user.js')
 let router = new Router();
+let goods = require('./appApi/goods.js')
+router.use('/goods',goods.routes())
 router.use('/user', user.routes())
 app.use(router.routes())
 app.use(router.allowedMethods())
