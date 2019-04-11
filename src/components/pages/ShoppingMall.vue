@@ -218,4 +218,5 @@ export default {
   overflow: hidden;
   background-color: #fff;
 }
+
 </style>
