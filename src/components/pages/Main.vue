@@ -1,16 +1,19 @@
-    <template>
+<template>
   <div>
     <div class="main-div">
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </div>
     <van-tabbar v-model="active" @change="changeTabbar(active)">
       <van-tabbar-item icon="shop">首页</van-tabbar-item>
-      <van-tabbar-item icon="records">列表页</van-tabbar-item>
-      <van-tabbar-item icon="cart">购物车页</van-tabbar-item>
-      <van-tabbar-item icon="contact" info="20">会员中心</van-tabbar-item>
+      <van-tabbar-item icon="records">列表</van-tabbar-item>
+      <van-tabbar-item icon="cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="contact">会员中心</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -18,7 +21,19 @@ export default {
       active: 0
     };
   },
+  created() {
+    this.changeTabBarActive();
+  },
+  updated() {
+    this.changeTabBarActive();
+  },
   methods: {
+    changeTabBarActive() {
+      this.nowPath = this.$route.path;
+      if (this.nowPath == "/cart") {
+        this.active = 2;
+      }
+    },
     changeTabbar(active) {
       console.log(active);
       switch (active) {
@@ -32,11 +47,13 @@ export default {
           this.$router.push({ name: "Cart" });
           break;
         case 3:
+          this.$router.push({ name: "Member" });
           break;
       }
     }
   }
 };
 </script>
+
 <style scoped>
 </style>
